@@ -17,7 +17,7 @@ def test_query():
     if len(sys.argv) == 5:
         params['country'] = sys.argv[4]
     if len(sys.argv) == 6:
-        params['num_results'] = sys.argv[5] if sys.argv[5] else None
+        params['num_results'] = sys.argv[5] or None
     # print query, location
     query_instance = QUERY(None)
     return query_instance.retrieve_html(params)
