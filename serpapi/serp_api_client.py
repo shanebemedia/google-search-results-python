@@ -28,9 +28,8 @@ class SerpApiClient(object):
         self.params_dict['source'] = 'python'
         if self.SERP_API_KEY:
             self.params_dict['serp_api_key'] = self.SERP_API_KEY
-        if self.engine:
-            if not 'engine' in self.params_dict:
-                self.params_dict['engine'] = self.engine
+        if self.engine and 'engine' not in self.params_dict:
+            self.params_dict['engine'] = self.engine
         return self.BACKEND + path, self.params_dict
 
     def get_results(self, path = '/search'):
@@ -94,8 +93,7 @@ class SerpApiClient(object):
         Returns:
             Dict: Location matching q
         """
-        self.params_dict = {}
-        self.params_dict["output"] = "json"
+        self.params_dict = {"output": "json"}
         self.params_dict["q"] = q
         self.params_dict["limit"] = limit
         return json.loads(self.get_results('/locations.json'))
